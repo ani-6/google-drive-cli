@@ -12,8 +12,11 @@ SCOPES = ['https://www.googleapis.com/auth/drive']
 
 def authenticate():
     creds = None
-    token_path = 'tokens/token3.json'
-    creds_path = 'tokens/credentials3.json'
+    # Get the directory where this script resides
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    tokens_dir = os.path.join(script_dir, 'tokens')
+    token_path = os.path.join(tokens_dir, 'token.json')
+    creds_path = os.path.join(tokens_dir, 'credentials.json')
 
     if os.path.exists(token_path):
         creds = Credentials.from_authorized_user_file(token_path, SCOPES)
@@ -43,6 +46,9 @@ def list_drive_contents(folder_id=None):
     return results.get('files', [])
 
 def download_file(file_id, file_name):
+    # Ensure the directory exists
+    os.makedirs(os.path.dirname(file_name), exist_ok=True)
+    
     request = service.files().get_media(fileId=file_id)
     with open(file_name, 'wb') as f:
         downloader = MediaIoBaseDownload(f, request)

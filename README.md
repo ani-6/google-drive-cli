@@ -34,7 +34,7 @@ A Python-based command-line tool to ****upload****, ****download****, ****browse
 Place your files like this:
 
     your_project/
-    ├── script.py
+    ├── drive.py
     └── tokens/
         └── credentials.json   # ← from Google Cloud Console
 
@@ -47,7 +47,7 @@ Place your files like this:
 ▶️ Running the Script
 ---------------------
 
-    python script.py
+    python drive.py
 
 You’ll be prompted with a menu
 
